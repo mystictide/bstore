@@ -313,6 +313,7 @@ a {
 @media (max-width: 640px) {
     .nav {
         justify-content: flex-start !important;
+        column-gap: 0 !important;
         h2 {
             font-size: 14px;
             button {
