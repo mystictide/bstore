@@ -1,3 +1,5 @@
+import fallbackImage from "../../assets/img/img404.jpg";
+
 export default function Book({ data }) {
   return (
     <>
@@ -10,7 +12,7 @@ export default function Book({ data }) {
         >
           <div className="flex-column">
             <div className="info flex-column">
-              {data.volumeInfo.imageLinks ? (
+              {data.volumeInfo.imageLinks?.smallThumbnail ? (
                 <img
                   loading="lazy"
                   alt={data.title}
@@ -20,7 +22,7 @@ export default function Book({ data }) {
                 <img
                   loading="lazy"
                   alt={data.volumeInfo.title}
-                  src="/img404.jpg"
+                  src={fallbackImage}
                 />
               )}
               <h5>{data.volumeInfo.title}</h5>

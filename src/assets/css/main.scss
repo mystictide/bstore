@@ -271,10 +271,10 @@ a {
                         img {
                             width: 80%;
                             height: 195px;
-                            background-image: url("../../../public/img404.jpg");
-                            background-position: center;
-                            background-repeat: no-repeat;
-                            background-size: 100% 100%;
+                            // background-image: url("../../../public/img404.jpg");
+                            // background-position: center;
+                            // background-repeat: no-repeat;
+                            // background-size: 100% 100%;
                         }
                     }
 
@@ -313,10 +313,15 @@ a {
 @media (max-width: 640px) {
     .nav {
         justify-content: flex-start !important;
-        padding: 0 15px;
         h2 {
-            font-size: 16px;
+            font-size: 14px;
+            button {
+                width: 80px !important;
+            }
         }
+    }
+    .main-container .content-wrapper .content .title {
+        font-size: 1rem;
     }
     .pager {
         flex-direction: column;
@@ -326,7 +331,10 @@ a {
             margin: auto;
         }
     }
-    .main-container .content-wrapper .content .book-container .book-preview {
-        width: 175px;
+    .main-container .content-wrapper .content .book-container {
+        justify-content: center;
+        .book-preview {
+            width: 160px;
+        }
     }
 }

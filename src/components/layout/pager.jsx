@@ -1,32 +1,42 @@
-export default function Pager({ totalItems, startIndex, setStartIndex }) {
+export default function Pager({
+  currentPage,
+  setCurrentPage,
+  startIndex,
+  setStartIndex,
+  totalItems,
+}) {
+  const totalPages = Math.ceil(totalItems / 15);
+
+  const prevPage = async () => {
+    setCurrentPage(currentPage - 1);
+    setStartIndex(startIndex - 15);
+  };
+
+  const nextPage = async () => {
+    setCurrentPage(currentPage + 1);
+    setStartIndex(startIndex + 15);
+  };
+
   return (
     <div className="pager full-width">
       <h5 className="pager-info">
-        found {totalItems} items, currently on page{" "}
-        {startIndex > 0 ? (startIndex - 14) : 1}
+        found {totalItems} items, currently on page {currentPage}
       </h5>
-
       <ul className="flex-row h-list">
         {startIndex > 0 ? (
           <li className="pager-item">
-            <button
-              className="pager-button"
-              onClick={() => setStartIndex(startIndex - 15)}
-            >
+            <button className="pager-button" onClick={() => prevPage()}>
               Previous Page
             </button>
           </li>
         ) : (
           ""
         )}
-        {startIndex === totalItems ? (
+        {currentPage === totalPages ? (
           ""
         ) : (
           <li className="pager-item">
-            <button
-              className="pager-button"
-              onClick={() => setStartIndex(startIndex + 15)}
-            >
+            <button className="pager-button" onClick={() => nextPage()}>
               Next Page
             </button>
           </li>

@@ -9,6 +9,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [searchParams] = useSearchParams();
   const [startIndex, setStartIndex] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const [books, setBooks] = useState(null);
 
   useEffect(() => {
@@ -21,11 +22,7 @@ export default function Home() {
       fetchBooks();
     } else {
       const fetchBooks = async () => {
-        const data = await searchByTitle(
-          searchParams.get("k"),
-          startIndex,
-          15
-        );
+        const data = await searchByTitle(searchParams.get("k"), startIndex, 15);
         setBooks(data);
         setLoading(false);
       };
@@ -47,9 +44,11 @@ export default function Home() {
             {books?.items?.length > 0 ? (
               <>
                 <Pager
-                  totalItems={books.totalItems}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
                   startIndex={startIndex}
                   setStartIndex={setStartIndex}
+                  totalItems={books.totalItems}
                 />
                 <section className="book-container flex-row">
                   {books.items.map((data) => (
@@ -58,9 +57,11 @@ export default function Home() {
                 </section>
                 <section className="flex-row">
                   <Pager
-                    totalItems={books.totalItems}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
                     startIndex={startIndex}
                     setStartIndex={setStartIndex}
+                    totalItems={books.totalItems}
                   />
                 </section>
               </>
