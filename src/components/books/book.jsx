@@ -5,7 +5,7 @@ export default function Book({ data }) {
         <a
           className="book-preview"
           aria-label={data.volumeInfo.title}
-          href={`/details/${data.volumeInfo.industryIdentifiers[0].identifier}`}
+          href={`/bstore/#/details/${data.volumeInfo.industryIdentifiers[0].identifier}`}
           key={data.volumeInfo.industryIdentifiers[0].identifier}
         >
           <div className="flex-column">
