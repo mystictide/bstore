@@ -40,7 +40,11 @@ export default function Header() {
           <button
             className="btn-function"
             type="button"
-            onClick={() => navigate("/")}
+            onClick={() =>
+              navigate({
+                pathname: "/",
+              })
+            }
           >
             Book Store
           </button>
