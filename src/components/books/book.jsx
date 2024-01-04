@@ -1,28 +1,26 @@
 import React from "react";
-import { FaSearch } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
-export default function Book() {
+export default function Book({ data }) {
   return (
-    <header>
-      <div className="nav">
-        <h2 className="interactive">
-          <Link to={"/"}>Book Store</Link>
-        </h2>
-        <div className="search">
-          <form className="flex-row">
-            <input
-              type="text"
-              id="keyword"
-              name="keyword"
-              placeholder="..book search"
-            />
-            <button aria-label="search" type="submit" className="btn-function">
-              <FaSearch />
-            </button>
-          </form>
-        </div>
+    <div className="book-preview flex-column">
+      <div className="info flex-column">
+        {console.log(data)}
+        {data.volumeInfo.imageLinks ? (
+          <img
+            loading="lazy"
+            alt={data.title}
+            src={data.volumeInfo.imageLinks.smallThumbnail}
+          />
+        ) : (
+            <img
+            loading="lazy"
+            alt={data.volumeInfo.title}
+            src="/img404.jpg"
+          />
+        )}
+        <h5>{data.volumeInfo.title}</h5>
+        <h6>by {data.volumeInfo.authors[0]}</h6>
       </div>
-    </header>
+    </div>
   );
 }

@@ -1,10 +1,11 @@
 import axios from "axios";
 
-const API_URL = "https://openlibrary.org/search.json";
+// const API_URL = "https://openlibrary.org/search.json";
+const API_URL = "https://www.googleapis.com/books/v1/volumes";
 
-export async function getPopularBooks() {
+export async function getPopularBooks(max) {
   try {
-    let query ="?subject=javascript&sort=random&lang=eng&page=1&limit=10";
+    let query = `?q=subject:javascript&orderBy=newest&maxResults=${max}`;
     var config = {
       method: "get",
       url: API_URL + query,
