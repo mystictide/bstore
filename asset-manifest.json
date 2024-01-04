@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/bstore/static/css/main.64fcb851.css",
+    "main.css": "/bstore/static/css/main.81946385.css",
     "main.js": "/bstore/static/js/main.e91d54f2.js",
     "static/media/Montserrat-Regular.ttf": "/bstore/static/media/Montserrat-Regular.ceb11275ab638627a643.ttf",
     "index.html": "/bstore/index.html",
-    "main.64fcb851.css.map": "/bstore/static/css/main.64fcb851.css.map",
+    "main.81946385.css.map": "/bstore/static/css/main.81946385.css.map",
     "main.e91d54f2.js.map": "/bstore/static/js/main.e91d54f2.js.map"
   },
   "entrypoints": [
-    "static/css/main.64fcb851.css",
+    "static/css/main.81946385.css",
     "static/js/main.e91d54f2.js"
   ]
 }
