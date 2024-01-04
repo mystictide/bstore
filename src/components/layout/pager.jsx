@@ -2,9 +2,10 @@ export default function Pager({ totalItems, startIndex, setStartIndex }) {
   return (
     <div className="pager full-width">
       <h5 className="pager-info">
-        found {totalItems} items, currently on page {startIndex + 1}
+        found {totalItems} items, currently on page{" "}
+        {startIndex > 0 ? (startIndex - 14) : 1}
       </h5>
-      
+
       <ul className="flex-row h-list">
         {startIndex > 0 ? (
           <li className="pager-item">

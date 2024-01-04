@@ -309,3 +309,24 @@ a {
         font-size: 0.8rem;
     }
 }
+
+@media (max-width: 640px) {
+    .nav {
+        justify-content: flex-start !important;
+        padding: 0 15px;
+        h2 {
+            font-size: 16px;
+        }
+    }
+    .pager {
+        flex-direction: column;
+        justify-content: center;
+        row-gap: 1rem;
+        .pager-info {
+            margin: auto;
+        }
+    }
+    .main-container .content-wrapper .content .book-container .book-preview {
+        width: 175px;
+    }
+}
