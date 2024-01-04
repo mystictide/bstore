@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { searchByTitle } from "../../assets/js/dataHelpers";
+import { useNavigate } from "react-router-dom";
 
-export default function Header({ keyword, startIndex, setKeyword, setBooks }) {
+export default function Header() {
+  const navigate = useNavigate();
+  const [keyword, setKeyword] = useState("");
   const [scrolling, setScrolling] = useState("");
   const isSticky = () => {
     const scrollTop = document.body.scrollTop;
@@ -19,19 +21,27 @@ export default function Header({ keyword, startIndex, setKeyword, setBooks }) {
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    const data = await searchByTitle(keyword, startIndex, 15);
-    setBooks(data);
-  };
-
-  const reset = async () => {
-    setKeyword("")
+    if (keyword) {
+      navigate({
+        pathname: "/",
+        search: `?k=${keyword}`,
+      });
+    } else {
+      navigate({
+        pathname: "/",
+      });
+    }
   };
 
   return (
     <header className={`header ${scrolling}`}>
       <div className="nav">
         <h2 className="interactive">
-          <button className="btn-function" type="button" onClick={() => reset()}>
+          <button
+            className="btn-function"
+            type="button"
+            onClick={() => navigate("/")}
+          >
             Book Store
           </button>
         </h2>

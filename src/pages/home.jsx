@@ -1,75 +1,75 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { PropagateLoader } from "react-spinners";
-import { getPopularBooks } from "../assets/js/dataHelpers";
+import { getPopularBooks, searchByTitle } from "../assets/js/dataHelpers";
 import Book from "../components/books/book";
-import Header from "../components/layout/header";
 import Pager from "../components/layout/pager";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
-  const [keyword, setKeyword] = useState("");
+  const [searchParams] = useSearchParams();
   const [startIndex, setStartIndex] = useState(0);
   const [books, setBooks] = useState(null);
 
   useEffect(() => {
-    if (!keyword) {
+    if (!searchParams.get("k")) {
       const fetchBooks = async () => {
         const data = await getPopularBooks(startIndex, 15);
         setBooks(data);
         setLoading(false);
       };
       fetchBooks();
+    } else {
+      const fetchBooks = async () => {
+        const data = await searchByTitle(
+          searchParams.get("k"),
+          startIndex,
+          15
+        );
+        setBooks(data);
+        setLoading(false);
+      };
+      fetchBooks();
+      setLoading(false);
     }
-  }, [keyword, startIndex, setStartIndex]);
+  }, [searchParams, startIndex, setStartIndex]);
 
   return (
-    <>
-      <Header
-        keyword={keyword}
-        startIndex={startIndex}
-        setKeyword={setKeyword}
-        setBooks={setBooks}
-      />
-      <div className="content-wrapper">
-        <div className="content">
-          {loading ? (
-            <div className="loading">
-              <PropagateLoader
-                color="#015599"
-                size={30}
-                speedMultiplier={0.5}
-              />
-            </div>
-          ) : (
-            <div className="full-width flex-column">
-              <h3 className="title">Featured books on PROGRAMMING</h3>
-              {books ? (
-                <>
+    <div className="content-wrapper">
+      <div className="content">
+        {loading ? (
+          <div className="loading">
+            <PropagateLoader color="#015599" size={30} speedMultiplier={0.5} />
+          </div>
+        ) : (
+          <div className="full-width flex-column">
+            <h3 className="title">Featured books on PROGRAMMING</h3>
+            {books?.items?.length > 0 ? (
+              <>
+                <Pager
+                  totalItems={books.totalItems}
+                  startIndex={startIndex}
+                  setStartIndex={setStartIndex}
+                />
+                <section className="book-container flex-row">
+                  {books.items.map((data) => (
+                    <Book key={data.id} data={data} />
+                  ))}
+                </section>
+                <section className="flex-row">
                   <Pager
                     totalItems={books.totalItems}
                     startIndex={startIndex}
                     setStartIndex={setStartIndex}
                   />
-                  <section className="book-container flex-row">
-                    {books.items.map((data) => (
-                      <Book key={data.id} data={data} />
-                    ))}
-                  </section>
-                  <section className="flex-row">
-                    <Pager
-                      totalItems={books.totalItems}
-                      startIndex={startIndex}
-                      setStartIndex={setStartIndex}
-                    />
-                  </section>
-                </>
-              ) : (
-                <h5>Could not find any books.</h5>
-              )}
-            </div>
-          )}
-        </div>
+                </section>
+              </>
+            ) : (
+              <h5>Could not find any books.</h5>
+            )}
+          </div>
+        )}
       </div>
-    </>
+    </div>
   );
 }

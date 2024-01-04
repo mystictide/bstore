@@ -50,3 +50,27 @@ export async function searchByTitle(keyword, startIndex, max) {
     return true;
   }
 }
+
+export async function searchByID(isbn) {
+  try {
+    let query = `?q=isbn:${isbn}`;
+    var config = {
+      method: "get",
+      url: API_URL + query,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    var data = await axios(config)
+      .then(function (response) {
+        return response.data.items[0];
+      })
+      .catch(function (error) {
+        let err = { error: true, message: error?.response.data };
+        return err;
+      });
+    return data;
+  } catch (error) {
+    return true;
+  }
+}
