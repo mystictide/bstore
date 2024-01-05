@@ -18,14 +18,16 @@ export default function BookDetails() {
   const [existing, setExisting] = useState(null);
 
   useEffect(() => {
-    const fetchBook = async () => {
-      const data = await searchByID(param.id);
-      setBook(data);
-      setExisting(storage?.find((x) => x.id === data?.id) ?? null);
-      setLoading(false);
-    };
-    fetchBook();
-  }, [storage, param]);
+    if (!book) {
+      const fetchBook = async () => {
+        const data = await searchByID(param.id);
+        setBook(data);
+        setExisting(storage?.find((x) => x.id === data?.id) ?? null);
+        setLoading(false);
+      };
+      fetchBook();
+    }
+  }, [book, storage, param]);
 
   const handleCart = async (remove) => {
     const cartItem = {

@@ -12,7 +12,7 @@ export default function Cart() {
   const removeItem = async (id) => {
     await manageCart({ id }, true);
     toast("Removed from cart!");
-    setBooks(JSON.parse(localStorage.getItem("cart")));
+    setBooks(JSON.parse(localStorage.getItem("cart")) ?? null);
   };
 
   return (
@@ -20,10 +20,16 @@ export default function Cart() {
       <div className="content">
         <div className="full-width flex-column">
           <h3 className="title cart">
-            <span>
-              Shopping Cart ({books?.length}) <br /> {total} TRY
-            </span>
-            <button className="btn-function">Checkout</button>
+            {books?.length > 0 ? (
+              <>
+                <span>
+                  Shopping Cart ({books?.length}) <br /> {total} TRY
+                </span>
+                <button className="btn-function">Checkout</button>
+              </>
+            ) : (
+              <span style={{ marginRight: "auto" }}>Shopping Cart</span>
+            )}
           </h3>
           {books?.length > 0 ? (
             <div className="shopping-cart flex-column">
