@@ -371,6 +371,51 @@ button.active {
                     }
                 }
             }
+
+            .checkout {
+                padding: 0.5rem 0;
+                width: 100%;
+
+                form {
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    row-gap: 1rem;
+                    h3 {
+                        padding: 10px 0;
+                    }
+                    input {
+                        height: 49.6px;
+                        width: 100%;
+                        padding: 5px 10px;
+                        outline: rgba($flavour, 0.5);
+                        border: 1px solid rgba($flavour, 0.5);
+                        background: $bg;
+                        font-size: 16px;
+                        color: $flavour;
+                        @include transition();
+                        &::placeholder {
+                            color: $flavour;
+                            opacity: 0.8;
+                        }
+
+                        &::-ms-input-placeholder {
+                            color: $flavour;
+                        }
+
+                        &:hover,
+                        &:focus {
+                            @include transition();
+                            color: $dark-font;
+                            background: rgba($flavour, 0.2);
+                        }
+                    }
+                    .confirm {
+                        justify-content: center;
+                        align-items: center;
+                        width: 100%;
+                    }
+                }
+            }
         }
     }
 }
@@ -414,8 +459,34 @@ button.active {
             margin-right: 5px;
         }
     }
-    .main-container .content-wrapper .content .title {
-        font-size: 1rem;
+    .main-container .content-wrapper .content {
+        .title {
+            font-size: 1rem;
+        }
+        .book-container {
+            justify-content: center;
+            .book-preview {
+                width: 44%;
+            }
+            .book-details {
+                flex-direction: column;
+                row-gap: 1rem;
+                align-items: center;
+                width: 90%;
+                .info {
+                    align-items: center;
+                    width: 90%;
+                }
+            }
+        }
+        .checkout {
+            form {
+                flex-direction: column;
+                .flex-column{
+                    width: 100% !important;
+                }
+            }
+        }
     }
     .pager {
         flex-direction: column;
@@ -423,22 +494,6 @@ button.active {
         row-gap: 1rem;
         .pager-info {
             margin: auto;
-        }
-    }
-    .main-container .content-wrapper .content .book-container {
-        justify-content: center;
-        .book-preview {
-            width: 44%;
-        }
-        .book-details {
-            flex-direction: column;
-            row-gap: 1rem;
-            align-items: center;
-            width: 90%;
-            .info {
-                align-items: center;
-                width: 90%;
-            }
         }
     }
 }
