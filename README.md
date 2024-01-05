@@ -1,9 +1,9 @@
 ### Features   
-Fetches book data from Google Books API using Axios
-Displays a paginated list of books with a search function
-Allows users to add books to their shopping cart with a mocked price for each item as Google Books API does not provide such information
-A basic checkout form with working validation
-Responsive design for seamless user experience on various devices
+Fetches book data from Google Books API using Axios  
+Displays a paginated list of books with a search function  
+Allows users to add books to their shopping cart with a mocked price for each item as Google Books API does not provide such information  
+A basic checkout form with working validation  
+Responsive design for seamless user experience on various devices  
 
 ### Local build   
 To build Bstore locally, simply clone the repository and install the necessary dependencies:
