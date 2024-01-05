@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { FaStar } from "react-icons/fa";
+import { FaRegStar, FaStar } from "react-icons/fa";
+import Rating from "react-rating";
 import { useParams } from "react-router-dom";
 import { PropagateLoader } from "react-spinners";
 import { toast } from "react-toastify";
@@ -14,19 +15,17 @@ export default function BookDetails() {
   };
   const [price, setPrice] = useState(randomNumber(5, 150));
   const storage = JSON.parse(localStorage.getItem("cart"));
-  const [existing, setExisting] = useState(
-    storage?.find((x) => x.id === book?.id) ?? null
-  );
+  const [existing, setExisting] = useState(null);
 
   useEffect(() => {
     const fetchBook = async () => {
       const data = await searchByID(param.id);
-      console.log(data);
       setBook(data);
+      setExisting(storage?.find((x) => x.id === data?.id) ?? null);
       setLoading(false);
     };
     fetchBook();
-  }, [param]);
+  }, [storage, param]);
 
   const handleCart = async (remove) => {
     const cartItem = {
@@ -80,13 +79,23 @@ export default function BookDetails() {
                         <h3>{book.volumeInfo.title}</h3>
                         <h5>by {book.volumeInfo.authors?.join(", ")}</h5>
                         <h5>published by {book.volumeInfo.publisher}</h5>
-                        <span className="rating">
-                          {[...Array(book.volumeInfo.averageRating)].map(() => (
-                            <FaStar key={randomNumber(1, 30)} />
-                          ))}
-                        </span>
+                        {book.volumeInfo.averageRating ? (
+                          <span className="rating">
+                            <Rating
+                              start={0}
+                              stop={5}
+                              initialRating={book.volumeInfo.averageRating}
+                              emptySymbol={<FaRegStar />}
+                              fullSymbol={<FaStar />}
+                              fractions={2}
+                              readonly={true}
+                            />
+                          </span>
+                        ) : (
+                          <h5>Unrated</h5>
+                        )}
                         <span className="cart flex-column">
-                          <h3>{existing ? existing?.price : price} TL</h3>
+                          <h3>{existing ? existing?.price : price} TRY</h3>
                           <button
                             className={`btn-function ${
                               existing ? "active" : ""

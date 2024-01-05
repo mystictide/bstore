@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import { PiShoppingCartFill } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 
 export default function Header() {
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
   const [scrolling, setScrolling] = useState("");
+  const cart = JSON.parse(localStorage.getItem("cart"));
   const isSticky = () => {
     const scrollTop = document.body.scrollTop;
     const stickyClass = scrollTop >= 50 ? "scrolling" : "";
@@ -63,6 +65,20 @@ export default function Header() {
               <FaSearch />
             </button>
           </form>
+        </div>
+        <div className="shopping">
+          <button
+            className="btn-function"
+            type="button"
+            onClick={() =>
+              navigate({
+                pathname: "/cart",
+              })
+            }
+          >
+            <PiShoppingCartFill />
+          </button>
+          <label>{cart?.length}</label>
         </div>
       </div>
     </header>

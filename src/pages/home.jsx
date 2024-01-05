@@ -43,16 +43,18 @@ export default function Home() {
             <h3 className="title">Featured books on PROGRAMMING</h3>
             {books?.items?.length > 0 ? (
               <>
-                <Pager
-                  currentPage={currentPage}
-                  setCurrentPage={setCurrentPage}
-                  startIndex={startIndex}
-                  setStartIndex={setStartIndex}
-                  totalItems={books.totalItems}
-                />
+                <section className="flex-row">
+                  <Pager
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    startIndex={startIndex}
+                    setStartIndex={setStartIndex}
+                    totalItems={books.totalItems}
+                  />
+                </section>
                 <section className="book-container flex-row">
                   {books.items.map((data) => (
-                    <Book key={data.id} data={data} />
+                    <Book key={data.id} data={data.volumeInfo} />
                   ))}
                 </section>
                 <section className="flex-row">

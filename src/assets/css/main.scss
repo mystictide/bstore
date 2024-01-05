@@ -223,37 +223,34 @@ button.active {
                     }
                 }
             }
+            .shopping {
+                z-index: 1;
+                display: flex;
+                width: 60px;
+                margin-left: 35px;
+                background: none;
+                position: relative;
+                button {
+                    display: flex;
+                    background: rgba($flavour, 1);
+                    font-size: 1.4rem;
+                    align-items: center;
+                    justify-content: center;
+                }
+                label {
+                    color: $bg;
+                    position: absolute;
+                    bottom: 0;
+                    left: 5px;
+                    font-size: 0.8rem;
+                }
+            }
         }
     }
 
     .header.scrolling {
         z-index: 1;
         background: lighten($flavour, 20);
-    }
-
-    footer {
-        height: 50px;
-        width: 60px;
-        position: fixed;
-        bottom: 0;
-        right: 7%;
-        background: none;
-        z-index: 1;
-        display: flex;
-        button {
-            display: flex;
-            background: rgba($flavour, 1);
-            font-size: 1.4rem;
-            align-items: center;
-            justify-content: center;
-        }
-        label {
-            color: $bg;
-            position: absolute;
-            bottom: 0;
-            left: 5px;
-            font-size: 0.9rem;
-        }
     }
 
     .content-wrapper {
@@ -285,9 +282,17 @@ button.active {
                 @include light-background();
             }
 
+            .title.cart {
+                justify-content: flex-end;
+                column-gap: 2rem;
+                button {
+                    width: 40%;
+                }
+            }
+
             .book-container {
                 flex-wrap: wrap;
-
+                position: relative;
                 .book-preview {
                     padding: 10px;
                     width: 212px;
@@ -334,6 +339,37 @@ button.active {
                         }
                     }
                 }
+                .remove {
+                    width: 150px;
+                    height: 300px;
+                    @include transition();
+                    &:hover {
+                        @include transition();
+                        cursor: pointer;
+                        background: rgba(#8f000c, 0.2);
+                    }
+                    .book-preview {
+                        display: block;
+                        width: 150px;
+                        height: 300px;
+                        pointer-events: none;
+                    }
+                }
+            }
+
+            .shopping-cart {
+                .book-preview {
+                    width: 150px;
+                    .info {
+                        h5 {
+                            font-size: 0.75rem;
+                        }
+
+                        img {
+                            width: 100% !important;
+                        }
+                    }
+                }
             }
         }
     }
@@ -369,6 +405,13 @@ button.active {
             button {
                 width: 80px !important;
             }
+        }
+        .search {
+            width: 40%;
+        }
+        .shopping {
+            margin-left: auto !important;
+            margin-right: 5px;
         }
     }
     .main-container .content-wrapper .content .title {

@@ -1,9 +1,9 @@
 import { Route, HashRouter as Router, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Footer from "./components/layout/footer";
 import Header from "./components/layout/header";
 import BookDetails from "./pages/bookDetails";
+import Cart from "./pages/cart";
 import Home from "./pages/home";
 
 export default function App() {
@@ -14,8 +14,8 @@ export default function App() {
         <Routes basename="/bstore">
           <Route path="/:k?" element={<Home />} />
           <Route path="/details/:id" element={<BookDetails />} />
-        </Routes>
-        <Footer />
+          <Route path="/cart" element={<Cart />} />
+        </Routes> 
         <ToastContainer
           position="top-right"
           autoClose={3500}
