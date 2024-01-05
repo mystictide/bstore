@@ -74,3 +74,20 @@ export async function searchByID(isbn) {
     return true;
   }
 }
+
+export async function manageCart(item, remove) {
+  let arr = JSON.parse(localStorage.getItem("cart"));
+  if (remove) {
+    arr = arr.filter((i) => i.id !== item.id);
+  } else {
+    if (!arr) {
+      arr = [];
+    }
+    arr.push(item);
+  }
+  if (arr.length < 1) {
+    localStorage.removeItem("cart");
+  } else {
+    localStorage.setItem("cart", JSON.stringify(arr));
+  }
+}

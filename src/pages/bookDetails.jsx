@@ -1,21 +1,48 @@
 import { useEffect, useState } from "react";
+import { FaStar } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { PropagateLoader } from "react-spinners";
-import { searchByID } from "../assets/js/dataHelpers";
+import { toast } from "react-toastify";
+import { manageCart, searchByID } from "../assets/js/dataHelpers";
 
 export default function BookDetails() {
   const param = useParams();
   const [loading, setLoading] = useState(true);
   const [book, setBook] = useState(null);
+  const randomNumber = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  };
+  const [price, setPrice] = useState(randomNumber(5, 150));
+  const storage = JSON.parse(localStorage.getItem("cart"));
+  const [existing, setExisting] = useState(
+    storage?.find((x) => x.id === book?.id) ?? null
+  );
 
   useEffect(() => {
     const fetchBook = async () => {
       const data = await searchByID(param.id);
+      console.log(data);
       setBook(data);
       setLoading(false);
     };
     fetchBook();
   }, [param]);
+
+  const handleCart = async (remove) => {
+    const cartItem = {
+      id: book.id,
+      book: book.volumeInfo,
+      price,
+    };
+    await manageCart(cartItem, remove);
+    if (remove) {
+      toast("Removed from cart!");
+      setExisting(null);
+    } else {
+      toast("Added to cart!");
+      setExisting(cartItem);
+    }
+  };
 
   return (
     <>
@@ -35,21 +62,47 @@ export default function BookDetails() {
                 <div className="full-width flex-column">
                   <h3 className="title">{book.volumeInfo.title}</h3>
                   <section className="book-container flex-row">
-                    {book.volumeInfo.imageLinks ? (
-                      <img
-                        loading="lazy"
-                        alt={book.title}
-                        src={book.volumeInfo.imageLinks.smallThumbnail}
-                      />
-                    ) : (
-                      <img
-                        loading="lazy"
-                        alt={book.volumeInfo.title}
-                        src="/img404.jpg"
-                      />
-                    )}
-                    <h5>{book.volumeInfo.title}</h5>
-                    <h6>by {book.volumeInfo.authors?.join(", ")}</h6>
+                    <div className="book-details flex-row">
+                      {book.volumeInfo.imageLinks ? (
+                        <img
+                          loading="lazy"
+                          alt={book.volumeInfo.title}
+                          src={book.volumeInfo.imageLinks.thumbnail}
+                        />
+                      ) : (
+                        <img
+                          loading="lazy"
+                          alt={book.volumeInfo.title}
+                          src="/img404.jpg"
+                        />
+                      )}
+                      <div className="info flex-column">
+                        <h3>{book.volumeInfo.title}</h3>
+                        <h5>by {book.volumeInfo.authors?.join(", ")}</h5>
+                        <h5>published by {book.volumeInfo.publisher}</h5>
+                        <span className="rating">
+                          {[...Array(book.volumeInfo.averageRating)].map(() => (
+                            <FaStar key={randomNumber(1, 30)} />
+                          ))}
+                        </span>
+                        <span className="cart flex-column">
+                          <h3>{existing ? existing?.price : price} TL</h3>
+                          <button
+                            className={`btn-function ${
+                              existing ? "active" : ""
+                            }`}
+                            type="button"
+                            onClick={() =>
+                              existing ? handleCart(true) : handleCart(false)
+                            }
+                          >
+                            {existing ? "Remove from Cart" : "Add to Cart"}
+                          </button>
+                        </span>
+                        <label>Description</label>
+                        <h5>{book.volumeInfo.description}</h5>
+                      </div>
+                    </div>
                   </section>
                 </div>
               ) : (

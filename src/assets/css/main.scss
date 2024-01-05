@@ -115,6 +115,14 @@ a {
     }
 }
 
+button.active {
+    background-color: #8f000c;
+    &:hover {
+        @include transition();
+        background: rgba(#8f000c, 0.7);
+    }
+}
+
 .interactive {
     padding: 3px;
     @include transition();
@@ -223,6 +231,31 @@ a {
         background: lighten($flavour, 20);
     }
 
+    footer {
+        height: 50px;
+        width: 60px;
+        position: fixed;
+        bottom: 0;
+        right: 7%;
+        background: none;
+        z-index: 1;
+        display: flex;
+        button {
+            display: flex;
+            background: rgba($flavour, 1);
+            font-size: 1.4rem;
+            align-items: center;
+            justify-content: center;
+        }
+        label {
+            color: $bg;
+            position: absolute;
+            bottom: 0;
+            left: 5px;
+            font-size: 0.9rem;
+        }
+    }
+
     .content-wrapper {
         height: calc(100%);
         margin: 0 auto;
@@ -271,10 +304,6 @@ a {
                         img {
                             width: 80%;
                             height: 195px;
-                            // background-image: url("../../../public/img404.jpg");
-                            // background-position: center;
-                            // background-repeat: no-repeat;
-                            // background-size: 100% 100%;
                         }
                     }
 
@@ -282,6 +311,27 @@ a {
                         @include transition();
                         cursor: pointer;
                         background: rgba($flavour, 0.2);
+                    }
+                }
+                .book-details {
+                    column-gap: 2rem;
+                    img {
+                        width: 250px;
+                        height: 270px;
+                    }
+                    .info {
+                        width: 60%;
+                        padding: 5px 0;
+                        .rating {
+                            color: #dda200;
+                        }
+                        .cart {
+                            margin-top: auto;
+                            padding: 25px 0 5px 0;
+                            button {
+                                width: 300px;
+                            }
+                        }
                     }
                 }
             }
@@ -336,6 +386,16 @@ a {
         justify-content: center;
         .book-preview {
             width: 44%;
+        }
+        .book-details {
+            flex-direction: column;
+            row-gap: 1rem;
+            align-items: center;
+            width: 90%;
+            .info {
+                align-items: center;
+                width: 90%;
+            }
         }
     }
 }
