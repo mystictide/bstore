@@ -6,7 +6,7 @@ A basic checkout form with working validation
 Responsive design for seamless user experience on various devices  
 
 ### Local build   
-To build Bstore locally, simply clone the repository and install the necessary dependencies:
+To build this project locally, simply clone the repository and install the necessary dependencies:
 
 ```
 git clone https://github.com/mystictide/bstore.git
@@ -14,11 +14,11 @@ cd bstore
 npm install
 ```
 ### Usage
-To run Bstore locally, start the development server:
+To run this project locally, start the development server:
 ```
 npm run start
 ```
 ### Technologies Used
-Bstore is built or managed using the following technologies:
+This project is built or managed using the following technologies:
 
 React.js & SASS    
