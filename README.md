@@ -21,4 +21,4 @@ npm run start
 ### Technologies Used
 This project is built or managed using the following technologies:
 
-React.js & SASS    
+React.js & SCSS    
